@@ -1,9 +1,16 @@
-import { Button, Typography } from "@mui/material";
+'use client';
+
+import { Box, Button, Stack, Typography } from "@mui/material";
 
 export default function Home() {
-  return <h1>
-    <Typography>
-      Yahoo!
-    </Typography>
-  </h1>;
+  return (
+    <Box component="main" sx={{ p: 4 }}>
+      <Stack spacing={2} alignItems="flex-start">
+        <Typography variant="h1" component="h1">
+          Yahoo!
+        </Typography>
+        <Button variant="contained">Teste do MUI</Button>
+      </Stack>
+    </Box>
+  );
 }
