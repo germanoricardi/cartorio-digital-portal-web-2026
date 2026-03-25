@@ -12,13 +12,17 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@iconify/react": "^6.0.2",
+    "@mui/lab": "^7.0.1-beta.23",
     "@mui/material": "^7.3.9",
     "@mui/material-nextjs": "^7.3.9",
+    "lodash": "^4.17.23",
     "next": "16.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.24",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

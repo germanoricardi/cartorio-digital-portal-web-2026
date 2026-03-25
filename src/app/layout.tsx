@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
 
-import theme from "../theme/theme";
+import ThemeProvider from "@/theme";
 
 export const metadata: Metadata = {
   title: "App",
@@ -19,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider>
             <CssBaseline />
             {children}
           </ThemeProvider>
