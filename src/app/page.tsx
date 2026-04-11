@@ -1,16 +1,16 @@
 'use client';
 
-import { Box, Button, Stack, Typography } from "@mui/material";
+import AuthLayout from "@/layouts/AuthLayout";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 
 export default function Home() {
-  return (
-    <Box component="main" sx={{ p: 4 }}>
-      <Stack spacing={2} alignItems="flex-start">
-        <Typography variant="h1" component="h1">
-          Yahoo!
-        </Typography>
-        <Button variant="contained">Teste do MUI</Button>
-      </Stack>
-    </Box>
-  );
+
+  const leftContent = <img src="/icons/icon-512.png" alt="Login Image" />;
+
+  return <AuthLayout leftContent={leftContent}>
+    <Typography variant="h1" component="h1">
+      Yahoo!
+    </Typography>
+    <Button variant="contained">Teste do MUI</Button>
+  </AuthLayout>;
 }

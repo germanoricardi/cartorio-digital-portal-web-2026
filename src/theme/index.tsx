@@ -25,25 +25,25 @@ export default function ThemeProvider({ children }: Props) {
 
   const presets = createPresets('default');
 
-  const contrast = createContrast('default', 'light');
+  const contrast = createContrast('default', 'dark');
 
   const memoizedValue = useMemo(
     () => ({
       palette: {
-        ...palette('light'),
+        ...palette('dark'),
         ...presets.palette,
         ...contrast.palette,
       },
       customShadows: {
-        ...customShadows('light'),
+        ...customShadows('dark'),
         ...presets.customShadows,
       },
-      shadows: shadows('light'),
+      shadows: shadows('dark'),
       shape: { borderRadius: 8 },
       typography,
     }),
     [
-      'light',
+      'dark',
       presets.palette,
       presets.customShadows,
       contrast.palette,

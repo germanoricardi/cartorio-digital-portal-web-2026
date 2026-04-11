@@ -5,8 +5,10 @@ import { CssBaseline } from "@mui/material";
 import ThemeProvider from "@/theme";
 
 export const metadata: Metadata = {
-  title: "App",
-  description: "Application",
+  title: "Cartório Digital",
+  description: "Solicite certidões e documentos de cartório online com rapidez e segurança. Plataforma digital prática para emissão, acompanhamento e entrega de documentos sem sair de casa.",
+  applicationName: "Cartório Digital",
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -15,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider>
