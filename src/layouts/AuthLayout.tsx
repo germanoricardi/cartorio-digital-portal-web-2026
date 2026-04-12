@@ -5,14 +5,14 @@ type AuthLayoutProps = {
   leftContent: ReactNode;
 } & PropsWithChildren;
 
-export default function AuthLayout({ children, leftContent }: AuthLayoutProps) {
+const GridItem = styled(Grid)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: theme.spacing(2),
+}));
 
-  const GridItem = styled(Grid)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: theme.spacing(2),
-  }));
+export default function AuthLayout({ children, leftContent }: AuthLayoutProps) {
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
