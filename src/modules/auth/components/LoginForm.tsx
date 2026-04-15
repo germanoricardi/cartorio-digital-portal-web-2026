@@ -1,6 +1,6 @@
 'use client';
 
-import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import { Grid, Link, TextField } from "@mui/material";
 import { useAuth } from "../hooks/useAuth";
 import { useForm, Controller } from "react-hook-form";
@@ -70,7 +70,7 @@ export function LoginForm() {
         </Grid>
 
         <Grid>
-          <LoadingButton
+          <Button
             type="submit"
             variant="contained"
             size="large"
@@ -78,7 +78,7 @@ export function LoginForm() {
             loading={loading}
           >
             Entrar
-          </LoadingButton>
+          </Button>
         </Grid>
 
       </Grid>
