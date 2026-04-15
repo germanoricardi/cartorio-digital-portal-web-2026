@@ -25,8 +25,6 @@ const handler = NextAuth({
 
           const data = await res.json();
 
-          console.log("Resposta do backend:", { res, data });
-
           // 👉 ajuste conforme padrão do seu backend
           if (res.status != 200) {
             throw new Error(data.message || "Erro ao autenticar");
@@ -40,7 +38,6 @@ const handler = NextAuth({
             accessToken: data.accessToken,
           };
         } catch (error) {
-          console.log("Erro na autorização:", {error});
           throw new Error(error instanceof Error ? error.message : "Erro desconhecido");
         }
       },
