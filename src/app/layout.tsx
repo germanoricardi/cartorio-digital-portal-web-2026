@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { CssBaseline } from "@mui/material";
 
 import ThemeProvider from "@/theme";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Cartório Digital",
@@ -20,10 +21,12 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body>
         <AppRouterCacheProvider>
-          <ThemeProvider>
-            <CssBaseline />
-            {children}
-          </ThemeProvider>
+          <Providers>
+            <ThemeProvider>
+              <CssBaseline />
+              {children}
+            </ThemeProvider>
+          </Providers>
         </AppRouterCacheProvider>
       </body>
     </html>
