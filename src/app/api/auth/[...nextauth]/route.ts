@@ -2,6 +2,52 @@ import { createCoreApi } from "@/lib/api/core";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+// 🔒 evita múltiplos refresh simultâneos
+let refreshingPromise: Promise<any> | null = null;
+
+// 🔄 função de refresh
+async function refreshAccessToken(token: any) {
+  try {
+    const api = await createCoreApi();
+
+    const res = await api.post("/v1/auth/refresh-token", {
+      refresh_token: token.refreshToken,
+    });
+
+    const data = res.data;
+
+    // 🔐 valida resposta
+    if (!data?.accessToken || !data?.refreshToken) {
+      throw new Error("Invalid refresh response");
+    }
+
+    // 📦 decode JWT
+    const decoded = JSON.parse(
+      Buffer.from(data.accessToken.split(".")[1], "base64").toString()
+    );
+
+    return {
+      ...token,
+      accessToken: data.accessToken,
+
+      // 🔥 rotação obrigatória
+      refreshToken: data.refreshToken,
+
+      accessTokenExpires: decoded.exp * 1000,
+    };
+  } catch (error: any) {
+    console.error(
+      "❌ Erro ao renovar token",
+      error?.response?.data || error
+    );
+
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    };
+  }
+}
+
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -27,10 +73,9 @@ const handler = NextAuth({
             name: data.user.name,
             email: data.user.email,
             accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
           };
-
         } catch (error: any) {
-          // 👇 axios padrão
           const message =
             error?.response?.data?.message ||
             error?.message ||
@@ -48,16 +93,43 @@ const handler = NextAuth({
 
   callbacks: {
     async jwt({ token, user }) {
+      // 🔐 primeiro login
       if (user) {
-        token.accessToken = user.accessToken;
-        token.user = user;
+        const decoded = JSON.parse(
+          Buffer.from(user.accessToken.split(".")[1], "base64").toString()
+        );
+
+        return {
+          ...token,
+          accessToken: user.accessToken,
+          refreshToken: user.refreshToken,
+          accessTokenExpires: decoded.exp * 1000,
+          user,
+        };
       }
-      return token;
+
+      // ⏱ buffer para evitar expiração durante request
+      const buffer = 5000;
+
+      if (Date.now() < (token as any).accessTokenExpires - buffer) {
+        return token;
+      }
+
+      // 🔒 mutex para evitar múltiplos refresh
+      if (!refreshingPromise) {
+        refreshingPromise = refreshAccessToken(token).finally(() => {
+          refreshingPromise = null;
+        });
+      }
+
+      return refreshingPromise;
     },
 
     async session({ session, token }) {
-      session.user = token.user;
-      session.accessToken = token.accessToken;
+      session.user = (token as any).user;
+      session.accessToken = (token as any).accessToken;
+      session.error = (token as any).error;
+
       return session;
     },
   },

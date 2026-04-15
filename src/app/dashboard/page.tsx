@@ -3,9 +3,10 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Grid, Typography, Button, Paper } from "@mui/material";
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const router = useRouter();
 
   // 🔒 proteção de rota
@@ -29,28 +30,60 @@ export default function DashboardPage() {
   };
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Dashboard</h1>
+    <Grid container justifyContent="center"  mt={6}>
+      <Grid size={{ xs: 12, sm: 8, md: 5 }}>
+        <Paper elevation={3} sx={{ p: 4 }}>
 
-      <div style={{ marginTop: 20 }}>
-        <p><strong>Nome:</strong> {name}</p>
-        <p><strong>Email:</strong> {email}</p>
-      </div>
+          <Grid container spacing={2}>
 
-      <button
-        onClick={() =>
-          signOut({
-            callbackUrl: '/'
-          })
-        }
-        style={{
-          marginTop: 20,
-          padding: "10px 16px",
-          cursor: "pointer",
-        }}
-      >
-        Logout
-      </button>
-    </div>
+            <Grid size={{ xs: 12 }}>
+              <Typography variant="h5" fontWeight="bold">
+                Dashboard
+              </Typography>
+            </Grid>
+
+            <Grid size={{ xs: 12 }}>
+              <Typography>
+                <strong>Nome:</strong> {name}
+              </Typography>
+            </Grid>
+
+            <Grid size={{ xs: 12 }}>
+              <Typography>
+                <strong>Email:</strong> {email}
+              </Typography>
+            </Grid>
+
+            <Grid size={{ xs: 6 }}>
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={() => update()}
+              >
+                Testar refresh
+              </Button>
+            </Grid>
+
+            <Grid size={{ xs: 6 }}>
+              <Button
+                variant="outlined"
+                color="error"
+                fullWidth
+                onClick={() =>
+                  signOut({
+                    callbackUrl: "/",
+                  })
+                }
+              >
+                Logout
+              </Button>
+            </Grid>
+
+          </Grid>
+
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
