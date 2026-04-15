@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { authService } from '../auth.service';
 import { LoginPayload, AuthResponse } from '../auth.types';
+import { signIn } from 'next-auth/react';
 
 export function useAuth() {
-  const [authResponse, setAuthResponse] = useState<AuthResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,8 +11,17 @@ export function useAuth() {
     setError(null);
 
     try {
-      const res = await authService.login(data);
-      setAuthResponse(res);
+      const res = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
+
+      if(res?.status === 200)
+        return res;
+
+      if(res?.error)
+        setError(res.error ?? "Erro realizar o login. Verifique os dados.");
+
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -22,10 +30,8 @@ export function useAuth() {
   }
 
   return {
-    authResponse,
     loading,
     error,
     login,
-    isAuthenticated: !!authResponse,
   };
 }

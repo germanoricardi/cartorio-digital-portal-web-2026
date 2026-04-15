@@ -6,14 +6,11 @@ import { useAuth } from "../hooks/useAuth";
 import { useForm, Controller } from "react-hook-form";
 import { loginSchema, LoginSchema } from "../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-import { set } from "lodash";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
-  const { login } = useAuth();
-  const [loading, setLoading] = useState<string | boolean>(false)
-  const [error, setError] = useState<string | boolean>(false)
+  const { login, loading, error } = useAuth();
+  const router = useRouter();
 
   const {
     control,
@@ -27,18 +24,11 @@ export function LoginForm() {
     },
   });
 
-  async function onSubmit(data: LoginSchema) {
-    setError(false);
-    setLoading(true);
+  const onSubmit = async (data: LoginSchema) => {
+    const res = await login(data)
 
-    const res = await signIn("credentials", {
-      ...data,
-      redirect: false,
-    })
-    .finally(() => setLoading(false));
-    
-    if(res?.error)
-      setError(res.error ?? "Erro realizar o login. Verifique os dados.");
+    if(res?.ok)
+      router.push("/dashboard");
   }
 
   return (
@@ -47,8 +37,8 @@ export function LoginForm() {
 
         {
           error && (
-            <Grid>
-              <Alert severity="error" variant="outlined">{error}</Alert>
+            <Grid my={2}>
+              <Alert severity="warning" variant="outlined">{error}</Alert>
             </Grid>
           )
         }
