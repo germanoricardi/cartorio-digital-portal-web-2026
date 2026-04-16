@@ -1,6 +1,6 @@
 'use client';
 
-import AuthLayout from "@/layouts/AuthLayout";
+import AuthLayout from "@/layouts/auth";
 import { LoginForm } from "@/modules/auth/components/LoginForm";
 import { Grid, Link, Typography } from "@mui/material";
 
