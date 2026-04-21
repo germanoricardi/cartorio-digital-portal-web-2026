@@ -23,5 +23,5 @@ COPY --chown=node:node . .
 
 EXPOSE 3000
 
-CMD [ "npm", "install"]
+#CMD [ "npm", "install"]
 CMD [ "npm", "run", "dev" ]
