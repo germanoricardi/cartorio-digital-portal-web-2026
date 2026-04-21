@@ -4,20 +4,6 @@ import { alpha } from '@mui/material/styles';
 
 export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
 
-declare module '@mui/material/styles/createPalette' {
-  interface TypeBackground {
-    neutral: string;
-  }
-  interface SimplePaletteColorOptions {
-    lighter: string;
-    darker: string;
-  }
-  interface PaletteColor {
-    lighter: string;
-    darker: string;
-  }
-}
-
 // SETUP COLORS
 
 export const grey = {
