@@ -1,3 +1,5 @@
+'use client';
+
 import CustomPopover, { usePopover } from "@/components/CustomPopover";
 import { Avatar, Box, Divider, IconButton, MenuItem, Stack, Typography } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
