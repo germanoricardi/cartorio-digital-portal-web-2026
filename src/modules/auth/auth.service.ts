@@ -7,8 +7,9 @@ export const authService = {
       const res = await authApi.login(data);
 
       return {
-        access_token: res.data.access_token,
-        refresh_token: res.data.refresh_token,
+        accessToken: res.data.access_token,
+        refreshToken: res.data.refresh_token,
+        user: res.data.user,
       };
     } catch (err: any) {
       if (err.response?.status === 401) {
