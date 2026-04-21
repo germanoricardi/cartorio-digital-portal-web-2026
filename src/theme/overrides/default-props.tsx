@@ -1,4 +1,4 @@
-import Iconify from '@/components/iconify';
+import Iconify from '@/components/Iconify';
 import { Theme } from '@mui/material/styles';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
