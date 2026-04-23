@@ -15,6 +15,7 @@ import { componentsOverrides } from './overrides';
 import { createPresets } from './options/presets';
 import { createContrast } from './options/contrast';
 import { merge } from 'lodash';
+import { useSettingsContext } from '@/contexts/settings';
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -22,28 +23,31 @@ type Props = {
 };
 
 export default function ThemeProvider({ children }: Props) {
+  const settings = useSettingsContext();
 
-  const presets = createPresets('default');
+  const presets = createPresets(settings.themeColorPresets);
 
-  const contrast = createContrast('default', 'dark');
+  const contrast = createContrast(settings.themeContrast, settings.themeMode);
 
   const memoizedValue = useMemo(
     () => ({
       palette: {
-        ...palette('dark'),
+        ...palette(settings.themeMode),
         ...presets.palette,
         ...contrast.palette,
       },
       customShadows: {
-        ...customShadows('dark'),
+        ...customShadows(settings.themeMode),
         ...presets.customShadows,
       },
-      shadows: shadows('dark'),
+      shadows: shadows(settings.themeMode),
       shape: { borderRadius: 8 },
       typography,
     }),
     [
-      'dark',
+      settings.themeMode,
+      settings.themeContrast,
+      settings.themeColorPresets,
       presets.palette,
       presets.customShadows,
       contrast.palette,
