@@ -1,5 +1,6 @@
 "use client";
 
+import SettingsDrawer from "@/components/SettingsDrawer";
 import { SettingsProvider } from "@/contexts/settings/provider";
 import { SessionProvider } from "next-auth/react";
 
@@ -11,6 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         themeContrast: 'bold',
         themeColorPresets: 'blue'
       }}>
+        <SettingsDrawer />
         {children}
       </SettingsProvider>
     </SessionProvider>
