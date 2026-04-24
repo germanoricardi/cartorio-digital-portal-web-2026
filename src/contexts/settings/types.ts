@@ -4,6 +4,7 @@ export type SettingsValueProps = {
   themeMode: 'light' | 'dark';
   themeContrast: 'default' | 'bold';
   themeColorPresets: 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+  themeLayout: 'vertical' | 'mini';
 };
 
 export type SettingsContextProps = SettingsValueProps & {

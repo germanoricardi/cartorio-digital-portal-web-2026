@@ -10,7 +10,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <SettingsProvider defaultSettings={{
         themeMode: 'light',
         themeContrast: 'bold',
-        themeColorPresets: 'blue'
+        themeColorPresets: 'blue',
+        themeLayout: 'vertical',
       }}>
         <SettingsDrawer />
         {children}
