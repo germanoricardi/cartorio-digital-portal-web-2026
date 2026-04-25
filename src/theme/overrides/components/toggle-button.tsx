@@ -47,7 +47,7 @@ export function toggleButton(theme: Theme) {
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: {
-          borderRadius: theme.shape.borderRadius,
+          borderRadius: Number(theme.shape.borderRadius),
           backgroundColor: theme.palette.background.paper,
           border: `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
         },
@@ -57,7 +57,7 @@ export function toggleButton(theme: Theme) {
             boxShadow: 'none',
           },
           '&:not(:first-of-type), &:not(:last-of-type)': {
-            borderRadius: theme.shape.borderRadius,
+            borderRadius: Number(theme.shape.borderRadius),
             borderColor: 'transparent',
           },
         },

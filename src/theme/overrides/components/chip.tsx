@@ -115,7 +115,7 @@ export function chip(theme: Theme) {
       disabledState,
       {
         fontWeight: 500,
-        borderRadius: theme.shape.borderRadius,
+        borderRadius: Number(theme.shape.borderRadius),
       },
     ];
   };

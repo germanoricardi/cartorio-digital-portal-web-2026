@@ -122,7 +122,7 @@ export function textField(theme: Theme) {
     MuiFilledInput: {
       styleOverrides: {
         root: {
-          borderRadius: theme.shape.borderRadius,
+          borderRadius: Number(theme.shape.borderRadius),
           backgroundColor: alpha(theme.palette.grey[500], 0.08),
           '&:hover': {
             backgroundColor: alpha(theme.palette.grey[500], 0.16),

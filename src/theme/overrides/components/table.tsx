@@ -64,7 +64,7 @@ export function table(theme: Theme) {
         select: {
           paddingLeft: 8,
           '&:focus': {
-            borderRadius: theme.shape.borderRadius,
+            borderRadius: Number(theme.shape.borderRadius),
           },
         },
         selectIcon: {
