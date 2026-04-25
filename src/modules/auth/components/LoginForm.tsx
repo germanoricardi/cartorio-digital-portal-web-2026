@@ -7,12 +7,14 @@ import { useForm, Controller } from "react-hook-form";
 import { loginSchema, LoginSchema } from "../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function LoginForm() {
   const { login, loading, error } = useAuth();
   const router = useRouter();
   const locale = useLocale();
+
+  const t = useTranslations();
 
   const {
     control,
@@ -52,7 +54,7 @@ export function LoginForm() {
             render={({ field }) => (
               <TextField
                 {...field}
-                label="Email"
+                label={t('auth.email')}
                 fullWidth
                 error={!!errors.email}
                 helperText={errors.email?.message}
@@ -68,7 +70,7 @@ export function LoginForm() {
             render={({ field }) => (
               <TextField
                 {...field}
-                label="Senha"
+                label={t('auth.password')}
                 type="password"
                 fullWidth
                 error={!!errors.password}
@@ -80,7 +82,7 @@ export function LoginForm() {
 
         <Grid textAlign="end">
           <Link variant="body2" underline="always">
-            Esqueceu a senha?
+            {t('auth.forgotPassword')}
           </Link>
         </Grid>
 
@@ -92,7 +94,7 @@ export function LoginForm() {
             fullWidth
             loading={loading}
           >
-            Entrar
+            {t('auth.login')}
           </Button>
         </Grid>
 
