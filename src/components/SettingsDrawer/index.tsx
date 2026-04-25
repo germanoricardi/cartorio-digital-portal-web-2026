@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Drawer, { drawerClasses } from '@mui/material/Drawer';
 
-// import { paper } from 'src/theme/css';
 import { paper } from '@/theme/css';
 
 import Iconify from '../Iconify';
@@ -17,11 +16,6 @@ import { useSettingsContext } from '@/contexts/settings';
 import BaseOptions from './base-option';
 import Scrollbar from '../Scrollbar';
 import FullScreenOption from './fullscreen-option';
-
-// import Iconify from '../../iconify';
-// import Scrollbar from '../../scrollbar';
-// import BaseOptions from './base-option';
-// import FullScreenOption from './fullscreen-option';
 
 // ----------------------------------------------------------------------
 
@@ -64,7 +58,7 @@ export default function SettingsDrawer() {
   const renderMode = (
     <div>
       <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
-        Mode
+        Mode:
       </Typography>
 
       <BaseOptions
@@ -72,6 +66,21 @@ export default function SettingsDrawer() {
         onChange={(newValue: any) => settings.onUpdate('themeMode', newValue)}
         options={['light', 'dark']}
         icons={['sun', 'moon']}
+      />
+    </div>
+  );
+
+  const renderContrast = (
+    <div>
+      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
+        Contrast
+      </Typography>
+
+      <BaseOptions
+        value={settings.themeContrast}
+        onChange={(newValue: any) => settings.onUpdate('themeContrast', newValue)}
+        options={['default', 'bold']}
+        icons={['contrast', 'contrast_bold']}
       />
     </div>
   );
@@ -98,6 +107,7 @@ export default function SettingsDrawer() {
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3 }}>
           {renderMode}
+          {renderContrast}
         </Stack>
       </Scrollbar>
 

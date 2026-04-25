@@ -46,8 +46,6 @@ export default function ThemeProvider({ children }: Props) {
     }),
     [
       settings.themeMode,
-      settings.themeContrast,
-      settings.themeColorPresets,
       presets.palette,
       presets.customShadows,
       contrast.palette,

@@ -2,6 +2,7 @@
 
 import SettingsDrawer from "@/components/SettingsDrawer";
 import { SettingsProvider } from "@/contexts/settings/provider";
+import ThemeProvider from "@/theme";
 import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -13,8 +14,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
         themeColorPresets: 'blue',
         themeLayout: 'vertical',
       }}>
-        <SettingsDrawer />
-        {children}
+        <ThemeProvider>
+          <SettingsDrawer />
+          {children}
+        </ThemeProvider>
       </SettingsProvider>
     </SessionProvider>
   );
