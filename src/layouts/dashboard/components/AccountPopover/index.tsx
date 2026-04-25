@@ -3,6 +3,7 @@
 import CustomPopover, { usePopover } from "@/components/CustomPopover";
 import { Avatar, Box, Divider, IconButton, MenuItem, Stack, Typography } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
+import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 const OPTIONS = [
@@ -15,11 +16,12 @@ const OPTIONS = [
 export default function AccountPopover() {
   const router = useRouter();
   const popover = usePopover();
+  const locale = useLocale();
   const { data } = useSession();
 
   const handleClickItem = (path: string) => {
     popover.onClose();
-    router.push(path);
+    router.push(`/${locale}${path}`);
   };
 
   return (
@@ -66,7 +68,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: `/${locale}` })}
           sx={{ m: 1, fontWeight: 'fontWeightBold', color: 'error.main' }}
         >
           Sair

@@ -7,10 +7,12 @@ import { useForm, Controller } from "react-hook-form";
 import { loginSchema, LoginSchema } from "../schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
 export function LoginForm() {
   const { login, loading, error } = useAuth();
   const router = useRouter();
+  const locale = useLocale();
 
   const {
     control,
@@ -28,7 +30,7 @@ export function LoginForm() {
     const res = await login(data)
 
     if(res?.ok)
-      router.push("/dashboard");
+      router.push(`/${locale}/dashboard`);
   }
 
   return (

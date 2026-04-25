@@ -5,6 +5,8 @@ import { CssBaseline } from "@mui/material";
 import { Providers } from "./providers";
 import { MotionLazy } from "@/components/Animate/motion-lazy";
 
+import { NextIntlClientProvider } from 'next-intl';
+
 export const metadata: Metadata = {
   title: "Cartório Digital",
   description: "Solicite certidões e documentos de cartório online com rapidez e segurança. Plataforma digital prática para emissão, acompanhamento e entrega de documentos sem sair de casa.",
@@ -12,22 +14,30 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function RootLayout({
+  children,
+  params
+}: RootLayoutProps) {
+  const { locale } = await params;
+
   return (
-    <html lang="pt-BR">
+    <html lang={locale}>
       <body>
-        <AppRouterCacheProvider>
-          <Providers>
-            <MotionLazy>
-              <CssBaseline />
-              {children}
-            </MotionLazy>
-          </Providers>
-        </AppRouterCacheProvider>
+        <NextIntlClientProvider>
+          <AppRouterCacheProvider>
+            <Providers>
+              <MotionLazy>
+                <CssBaseline />
+                {children}
+              </MotionLazy>
+            </Providers>
+          </AppRouterCacheProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
