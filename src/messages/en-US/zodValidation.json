@@ -1,0 +1,4 @@
+{
+  "email": "Invalid email.",
+  "password": "Must have at least {min} characters."
+}
