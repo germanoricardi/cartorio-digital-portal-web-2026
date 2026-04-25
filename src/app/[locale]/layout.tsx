@@ -6,14 +6,29 @@ import { Providers } from "./providers";
 import { MotionLazy } from "@/components/Animate/motion-lazy";
 
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Cartório Digital",
-  description: "Solicite certidões e documentos de cartório online com rapidez e segurança. Plataforma digital prática para emissão, acompanhamento e entrega de documentos sem sair de casa.",
-  applicationName: "Cartório Digital",
-  manifest: '/manifest.json',
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  const t = await getTranslations({
+    locale,
+    namespace: 'app'
+  });
+
+  return {
+    title: t('name'),
+    description: t('seo.description'),
+    applicationName: t('name'),
+    manifest: '/manifest.json'
+  };
+}
 
 type RootLayoutProps = {
   children: React.ReactNode;
