@@ -1,10 +1,12 @@
 import createMiddleware from 'next-intl/middleware';
 
-export default createMiddleware({
+const intlProxy = createMiddleware({
   locales: ['pt-BR', 'en-US'],
   defaultLocale: 'pt-BR',
   localePrefix: 'always' // 👈 importante
 });
+
+export default intlProxy;
 
 export const config = {
   matcher: [
