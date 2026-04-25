@@ -10,6 +10,7 @@ import { HEADER, NAV } from "@/layouts/config-layout";
 import { bgBlur } from "@/theme/css";
 import { useOffSetTop } from "@/hooks/use-off-set-top";
 import { useSettingsContext } from "@/contexts/settings";
+import LanguagePopover from "../LanguagePopover";
 
 type Props = {
   onOpenNav?: VoidFunction;
@@ -43,8 +44,9 @@ export default function Header({ onOpenNav }: Props) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1 }}
       >
-        <SettingsButton />
 
+        <LanguagePopover />
+        <SettingsButton />
         <AccountPopover />
       </Stack>
     </>
