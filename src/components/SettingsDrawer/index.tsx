@@ -16,6 +16,7 @@ import { useSettingsContext } from '@/contexts/settings';
 import BaseOptions from './base-option';
 import Scrollbar from '../Scrollbar';
 import FullScreenOption from './fullscreen-option';
+import StretchOptions from './stretch-options';
 
 // ----------------------------------------------------------------------
 
@@ -85,6 +86,30 @@ export default function SettingsDrawer() {
     </div>
   );
 
+  const renderStretch = (
+    <div>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{
+          ...labelStyles,
+          display: 'inline-flex',
+          alignItems: 'center',
+        }}
+      >
+        Stretch
+        <Tooltip title="Only available at large resolutions > 1600px (xl)">
+          <Iconify icon="eva:info-outline" width={16} sx={{ ml: 0.5 }} />
+        </Tooltip>
+      </Typography>
+
+      <StretchOptions
+        value={settings.themeStretch}
+        onChange={() => settings.onUpdate('themeStretch', !settings.themeStretch)}
+      />
+    </div>
+  );
+
   return (
     <Drawer
       anchor="right"
@@ -108,6 +133,7 @@ export default function SettingsDrawer() {
         <Stack spacing={3} sx={{ p: 3 }}>
           {renderMode}
           {renderContrast}
+          {renderStretch}
         </Stack>
       </Scrollbar>
 

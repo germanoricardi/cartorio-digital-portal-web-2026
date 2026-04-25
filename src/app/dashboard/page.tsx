@@ -30,8 +30,8 @@ export default function DashboardPage() {
   };
 
   return (
-    <Grid container justifyContent="center"  mt={6}>
-      <Grid size={{ xs: 12, sm: 8, md: 5 }}>
+    <Grid container justifyContent="center">
+      <Grid size={{ xs: 12 }}>
         <Paper elevation={3} sx={{ p: 4 }}>
 
           <Grid container spacing={2}>

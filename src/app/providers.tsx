@@ -13,6 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         themeContrast: 'bold',
         themeColorPresets: 'blue',
         themeLayout: 'vertical',
+        themeStretch: false,
       }}>
         <ThemeProvider>
           <SettingsDrawer />

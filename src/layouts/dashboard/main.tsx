@@ -3,6 +3,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import { NAV, HEADER } from '../config-layout';
 import { useSettingsContext } from '@/contexts/settings';
 import { useResponsive } from '@/hooks/use-responsive';
+import { Container } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +37,9 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       }}
       {...other}
     >
-      {children}
+      <Container maxWidth={settings.themeStretch ? false : 'lg'} sx={{ p: '0 !important' }}>
+        {children}
+      </Container>
     </Box>
   );
 }
