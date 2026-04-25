@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { MotionLazy } from "@/components/Animate/motion-lazy";
 
 import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Cartório Digital",
@@ -25,10 +26,12 @@ export default async function RootLayout({
 }: RootLayoutProps) {
   const { locale } = await params;
 
+  const messages = await getMessages({ locale });
+
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <AppRouterCacheProvider>
             <Providers>
               <MotionLazy>
